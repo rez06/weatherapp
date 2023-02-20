@@ -1,0 +1,48 @@
+
+input::placeholder,
+input::-webkit-input-placeholder{
+  color: #F5F5F5 !important; 
+}
+
+.temp{
+    font-size: 2rem;
+}
+.logo {
+  font-size: 3rem;
+  background: -webkit-linear-gradient(to left, #371B58, #F5F5F5);
+  background: linear-gradient(to left, #371B58, #F5F5F5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+p{
+    line-height: 0.75;
+}
+
+.glass-effect{
+    background: rgba(69, 60, 103, 0.3);
+    border-radius: 1rem;
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.icon{
+    transition: all 0.35s ease-in-out;
+}
+
+.icon:hover{
+    transform: rotateX(30deg);
+}
+
+.card-effect{
+    /* box-shadow: 0 8px 22px rgba(80, 76, 76, 0.1); */
+    transition: all 0.35s ease;
+}
+
+.card-effect:hover{
+    box-shadow: none;
+    transform: translateY(0.6rem);
+}
