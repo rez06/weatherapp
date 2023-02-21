@@ -43,14 +43,14 @@
                 <div class="col-md-2 pt-3 text-sm-center">
                     <div class="row flex-md-column">
                         <div class="col text-md-start">
-                            <h1 class="font-size-lg fw-bold">Manila</h1>
-                            <p class="lead fw-bold">Philippines</p>
+                            <h1 class="font-size-lg fw-bold" id="city"></h1>
+                            <p class="lead fw-bold" id="country">Philippines</p>
                         </div>
                         <div class="col text-start mt-md-5 mt-sm-0">
-                            <h2 class="lead my-4 display-4 mt-0 fw-bold">26<span class="text-secondary">°</span> <a href="#" class="text-decoration-none text-altlight temp">C</a> <span class="temp">/</span> <a href="#" class="text-decoration-none text-altlight temp">F</a></h2>
-                        <p>Wind:</p>
-                        <p>Humidity: </p>
-                        <p>Chance of rain: </p>
+                            <h2 class="lead my-4 display-4 mt-0 fw-bold"><span id="temperature"></span><span class="text-secondary">°</span> <a href="#" class="text-decoration-none text-altlight temp">C</a> <span class="temp">/</span> <a href="#" class="text-decoration-none text-altlight temp">F</a></h2>
+                            <p class="text-capitalize" id="description"></p>                        
+                            <p>Wind: <span id="wind"></span> km/h</p>
+                            <p>Humidity: <span id="humidity"></span> </p>
                         </div>
                     </div>
                 </div>
@@ -261,5 +261,7 @@
         </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
