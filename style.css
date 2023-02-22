@@ -11,12 +11,31 @@ input::-webkit-input-placeholder{
 
 .logo {
   font-size: 3rem;
-  background: -webkit-linear-gradient(to left, #371B58, #F5F5F5);
+}
+
+.weather-temp .active{
+    cursor:default;
+    color: #EAEAEA;
+   
+    
+}
+
+.weather-temp .active:hover{
+     color: #7F669D;
+    
+}
+
+.text-accent{
+      background: -webkit-linear-gradient(to left, #371B58, #F5F5F5);
   background: linear-gradient(to left, #371B58, #F5F5F5);
   background-clip: text;
   -webkit-background-clip: text;
   text-fill-color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+#description::first-letter{
+    text-transform: capitalize;
 }
 
 p{

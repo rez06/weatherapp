@@ -14,7 +14,7 @@
     <nav class="navbar mt-3">
         <div class="container">
             <div class="row mx-auto">
-                <a class="navbar-brand fw-bold text-uppercase logo" href="#">
+                <a class="navbar-brand fw-bold text-uppercase logo text-accent" href="#">
                     <span>
                     <i class="bi bi-cloud-haze2-fill"></i></i>weatha    
                     </span>
@@ -26,11 +26,11 @@
     <!-- As a heading -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid ">
-            <form class=" d-flex mx-auto" role="search">
+            <form class="search-form d-flex mx-auto" role="search">
                 <div class="input-group mb-3">
-                    <input class="form-control border-0 bg-primary opacity-50" type="search" placeholder="Search City " aria-label="Search">
-                        <span class="input-group-text me-2 border-0 bg-secondary opacity-50 text-light rounded-start-0 rounded-end rounded-bottom" id="basic-addon1"><i class="bi bi-search"></i></span>
-                        <button class="btn btn-outline-success border-0 bg-primary opacity-50 text-light rounded" type="submit"><i class="bi bi-geo-alt-fill me-1"></i>Current</button>
+                    <input class="form-control border-0 bg-primary opacity-50 text-altlight" id="city-input" type="search" placeholder="Search City" aria-label="Search" autocomplete="off">
+                    <button type="submit" class="search input-group-text me-2 border-0 bg-secondary opacity-50 text-light rounded-start-0 rounded-end rounded-bottom" id="basic-addon1"><i class="bi bi-search"></i></=>
+                    <button class="btn btn-outline-success border-0 bg-primary opacity-50 text-light rounded" type="submit"><i class="bi bi-geo-alt-fill me-1"></i>Current</button>
                 </div>
             </form>
         </div>
@@ -43,11 +43,17 @@
                 <div class="col-md-2 pt-3 text-sm-center">
                     <div class="row flex-md-column">
                         <div class="col text-md-start">
-                            <h1 class="font-size-lg fw-bold" id="city"></h1>
+                            <h1 class="font-size-lg fw-bold" id="city">Manila</h1>
                             <p class="lead fw-bold" id="country">Philippines</p>
                         </div>
                         <div class="col text-start mt-md-5 mt-sm-0">
-                            <h2 class="lead my-4 display-4 mt-0 fw-bold"><span id="temperature"></span><span class="text-secondary">°</span> <a href="#" class="text-decoration-none text-altlight temp">C</a> <span class="temp">/</span> <a href="#" class="text-decoration-none text-altlight temp">F</a></h2>                      
+                            <h2 class="weather-temp lead my-4 display-4 mt-0 fw-bold">
+                                <span id="temperature"></span>
+                                <span class="text-accent">°</span> 
+                                <a href="#" class="celsius text-decoration-none temp active">C</a> 
+                                <span class="temp">/</span> 
+                                <a href="#" class="farenheit text-decoration-none temp">F</a>
+                            </h2>                      
                             <p>Wind: <span id="wind"></span> km/h</p>
                             <p>Humidity: <span id="humidity"></span> </p>
                         </div>
@@ -55,15 +61,16 @@
                 </div>
 
                 <div class="col-md-3 py-sm-5 text-center">
-                            <img src="" alt="sun" class="icon img-fluid" id="icon">
-                            <h3 class="text-capitalize" id="description"></h3>                        
+                            <img src="images/sun.png" alt="sun" class="icon img-fluid" id="icon" width="100">
+                            <h3 class="text-accent" id="description"></h3>                        
                          
                 </div>
                 <div class="col-md-7 glass-effect">
                     <div class="row">
                         <div class="col  pt-3 px-4">
-                            <h2 class="font-size-sm" id="date">7:01 PM</h2>
-                            <p>Monday, February 20, 2023</p>
+                            <p>Last update</p>
+                            <h2 class="font-size-sm" id="date"></h2>
+                            
                         </div>
                     </div>
                     <div class="container text-center">
@@ -71,7 +78,7 @@
                             <div class="col">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">12 AM</h5>
-                                    <img src="" alt="" class="img-fluid p-2" width="50px">
+                                    <img src="images/sun.png" alt="" class="img-fluid p-2" width="50px">
                                 </div>
                             </div>
                             <div class="col">
@@ -147,7 +154,7 @@
         <div class="container-fluid px-5 text-center">
             <div class="row row-cols-7 mt-2 mb-5 g-3 g-lg-3">
                 <div class="col">
-                    <div class="glass-effect card-effect card border-0 mb-3 text-altlight">
+                    <div class="glass-effect card-effect card border-0 text-altlight">
                         <div class="card-body text-center">
                             <h5 class="card-title">Monday</h5>
                             <img src="images/sun.png" alt="" class="img-fluid" width="50px">
