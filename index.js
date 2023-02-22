@@ -1,3 +1,4 @@
+let apiKey = '060c7c61814c1dd7e9362ab95b9026ea';
 let temperatureEl = document.querySelector('#temperature');
 let cityElement = document.querySelector('#city');
 let countryElement = document.querySelector('#country');
@@ -6,9 +7,6 @@ let humidityElement = document.querySelector('#humidity');
 let windElement = document.querySelector('#wind')
 let iconElement = document.querySelector('#icon');
 let celsiusTemp = null;
-
-
-
 
 //variables for form
 let form = document.querySelector('.search-form');
@@ -25,9 +23,7 @@ function formatDate(timestamp) {
      if (hours < 10) {
         hours = `0${hours}`;
      }
-    
     let minutes = date.getMinutes();
-
     if (minutes < 10) {
         minutes = `0${minutes}`;
     }
@@ -38,10 +34,8 @@ function formatDate(timestamp) {
 
 function search(city) {
     // let city = 'Manila';
-    let apiKey = '060c7c61814c1dd7e9362ab95b9026ea';
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
     axios.get(apiUrl).then(displayTemperature);
-
 }
 
 function handleSubmit(event) {
@@ -50,6 +44,19 @@ function handleSubmit(event) {
     search(cityInputElement.value);    
 }
 
+function displayTemperature(response) {
+    celsiusTemp = response.data.main.temp;
+    temperatureEl.innerHTML = Math.round(celsiusTemp);
+    cityElement.innerHTML = response.data.name;
+    countryElement.innerHTML = response.data.sys.country;
+    tempDescription.innerHTML = response.data.weather[0].description;
+    humidityElement.innerHTML = response.data.main.humidity;
+    windElement.innerHTML = response.data.wind.speed;
+    dateElement.innerHTML = formatDate(response.data.dt * 1000); 
+   
+    iconElement.setAttribute('src', `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`);
+    iconElement.setAttribute('alt', response.data.weather[0].description);    
+}
 
 //variables for unit conversion
 let farenheitLink = document.querySelector('.farenheit');
@@ -74,18 +81,18 @@ function displayFarenheitTemp(event) {
     temperatureEl.innerHTML = Math.round(farenheitTemp);
 }
 
-function displayTemperature(response) {
-    celsiusTemp = response.data.main.temp;
-    temperatureEl.innerHTML = Math.round(celsiusTemp);
-    cityElement.innerHTML = response.data.name;
-    countryElement.innerHTML = response.data.sys.country;
-    tempDescription.innerHTML = response.data.weather[0].description;
-    humidityElement.innerHTML = response.data.main.humidity;
-    windElement.innerHTML = response.data.wind.speed;
-    dateElement.innerHTML = formatDate(response.data.dt * 1000); 
-   
-    iconElement.setAttribute('src', `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`);
-    iconElement.setAttribute('alt', response.data.weather[0].description);    
+
+let currentLocation = document.querySelector('.current-location');
+currentLocation.addEventListener('click', getCurrentPosition);
+
+function showPosition(position) {
+    apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${apiKey}`
+    console.log(apiUrl);
+    axios.get(apiUrl).then(displayTemperature);
+}
+function getCurrentPosition(event) {
+    event.preventDefault();
+    navigator.geolocation.getCurrentPosition(showPosition);
 }
 
 
