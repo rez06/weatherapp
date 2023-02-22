@@ -81,7 +81,7 @@ function displayFarenheitTemp(event) {
     temperatureEl.innerHTML = Math.round(farenheitTemp);
 }
 
-
+// for geolocation
 let currentLocation = document.querySelector('.current-location');
 currentLocation.addEventListener('click', getCurrentPosition);
 
