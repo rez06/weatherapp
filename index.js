@@ -8,10 +8,6 @@ let windElement = document.querySelector('#wind')
 let iconElement = document.querySelector('#icon');
 let celsiusTemp = null;
 
-//variables for form
-let form = document.querySelector('.search-form');
-form.addEventListener('submit', handleSubmit)
-
 // variables for date
 let dateElement = document.querySelector('#date');
     
@@ -32,17 +28,34 @@ function formatDate(timestamp) {
     return `${day} ${hours}:${minutes}`;
 }
 
+//Calling the API
 function search(city) {
-    // let city = 'Manila';
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
     axios.get(apiUrl).then(displayTemperature);
 }
 
+//Search function
+let form = document.querySelector('.search-form');
+form.addEventListener('submit', handleSubmit)
 function handleSubmit(event) {
     event.preventDefault();
     let cityInputElement = document.querySelector('#city-input');
     search(cityInputElement.value);    
 }
+
+function displayForecast(response) {
+    console.log(response.data.daily);
+    let forecastElement = document.querySelector('.day-card')
+}
+
+function getForecast(coordinates) {
+    let apiKey = '49b631c45785fe73d2a88477803dea22';
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}`
+    console.log(apiUrl);
+    axios.get(apiUrl).then(displayForecast)
+}
+
+
 
 function displayTemperature(response) {
     celsiusTemp = response.data.main.temp;
@@ -53,10 +66,13 @@ function displayTemperature(response) {
     humidityElement.innerHTML = response.data.main.humidity;
     windElement.innerHTML = response.data.wind.speed;
     dateElement.innerHTML = formatDate(response.data.dt * 1000); 
-   
     iconElement.setAttribute('src', `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`);
     iconElement.setAttribute('alt', response.data.weather[0].description);    
+
+    getForecast(response.data.coord);
+    
 }
+
 
 //variables for unit conversion
 let farenheitLink = document.querySelector('.farenheit');
@@ -65,6 +81,7 @@ farenheitLink.addEventListener('click', displayFarenheitTemp);
 let celsiusLink = document.querySelector('.celsius');
 celsiusLink.addEventListener('click', displayCelsiusTemp);
 
+//function for unit conversion
 function displayCelsiusTemp(event) {
     event.preventDefault();
     farenheitLink.classList.remove('active')

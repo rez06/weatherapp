@@ -8,7 +8,6 @@ input::-webkit-input-placeholder{
     font-size: 2rem;
 }
 
-
 .logo {
   font-size: 3rem;
 }
@@ -16,8 +15,7 @@ input::-webkit-input-placeholder{
 .weather-temp .active{
     cursor:default;
     color: #EAEAEA;
-   
-    
+       
 }
 
 .weather-temp .active:hover{
@@ -26,7 +24,7 @@ input::-webkit-input-placeholder{
 }
 
 .text-accent{
-      background: -webkit-linear-gradient(to left, #371B58, #F5F5F5);
+  background: -webkit-linear-gradient(to left, #371B58, #F5F5F5);
   background: linear-gradient(to left, #371B58, #F5F5F5);
   background-clip: text;
   -webkit-background-clip: text;
