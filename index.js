@@ -73,10 +73,10 @@ function displayForecast(response) {
                                     src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="50" class="img-fluid"/>
                                 <div class="row d-flex pt-2 justify-content-between">
                                     <div class="col">
-                                        <span class="max-temp">${Math.round(forecastDay.temp.max)}${`&deg`}</span>
+                                        <span class="max-temp">${Math.round(forecastDay.temp.max)}${'&deg'} </span>
                                     </div>
                                     <div class="col">
-                                        <span class="min-temp">${Math.round(forecastDay.temp.min)}${`&deg`}</span>
+                                        <span class="min-temp">${Math.round(forecastDay.temp.min)}${'&deg'}</span>
                                     </div>
                                 </div>
                             </div>
