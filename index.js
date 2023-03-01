@@ -7,6 +7,11 @@ let humidityElement = document.querySelector('#humidity');
 let windElement = document.querySelector('#wind')
 let iconElement = document.querySelector('#icon');
 let celsiusTemp = null;
+let tempMin = document.querySelector('[data-min-temp]');
+let tempMax = document.querySelector('[data-max-temp]');
+let tempPressure = document.querySelector('[data-pressure-temp]');
+let visibility = document.querySelector('[data-visibility')
+let clouds = document.querySelector('[data-clouds]')
 
 // variables for date
 let dateElement = document.querySelector('#date');
@@ -28,6 +33,14 @@ function formatDate(timestamp) {
     return `${day} ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let day = date.getDay();
+    let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+
+    return days[day];
+}
+
 //Calling the API
 function search(city) {
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
@@ -43,19 +56,45 @@ function handleSubmit(event) {
     search(cityInputElement.value);    
 }
 
+
 function displayForecast(response) {
-    console.log(response.data.daily);
-    let forecastElement = document.querySelector('.day-card')
+    let dailyForecast = response.data.daily;
+    let dailySection = document.querySelector('[data-day-section]');
+    let dailyForecastHTML = `<div class="row row-cols-7 mt-2 mb-5 g-3 g-lg-3 daily-data">`
+
+    dailyForecast.forEach(function (forecastDay, index) {
+        if (index <= 6) {
+            dailyForecastHTML +=
+            `<div class="col">
+                <div class="glass-effect card-effect card border-0 text-altlight">
+                            <div class="card-body text-center">
+                                <h5 class="card-title day">${formatDay(forecastDay.dt)}</h5>
+                                <img
+                                    src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="50" class="img-fluid"/>
+                                <div class="row d-flex pt-2 justify-content-between">
+                                    <div class="col">
+                                        <span class="max-temp">${Math.round(forecastDay.temp.max)}${`&deg`}</span>
+                                    </div>
+                                    <div class="col">
+                                        <span class="min-temp">${Math.round(forecastDay.temp.min)}${`&deg`}</span>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+            </div>`    
+        }
+    });
+
+    dailyForecastHTML = dailyForecastHTML + `</div>`;
+    dailySection.innerHTML = dailyForecastHTML;    
 }
 
 function getForecast(coordinates) {
     let apiKey = '49b631c45785fe73d2a88477803dea22';
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}`
-    console.log(apiUrl);
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`
+
     axios.get(apiUrl).then(displayForecast)
 }
-
-
 
 function displayTemperature(response) {
     celsiusTemp = response.data.main.temp;
@@ -68,11 +107,13 @@ function displayTemperature(response) {
     dateElement.innerHTML = formatDate(response.data.dt * 1000); 
     iconElement.setAttribute('src', `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`);
     iconElement.setAttribute('alt', response.data.weather[0].description);    
-
-    getForecast(response.data.coord);
-    
+    tempMin.innerHTML = `${response.data.main.temp_min}&deg`;
+    tempMax.innerHTML = `${response.data.main.temp_max}&deg`;
+    tempPressure.innerHTML = response.data.main.pressure;
+    visibility.innerHTML = response.data.visibility;
+    clouds.innerHTML = response.data.clouds.all
+    getForecast(response.data.coord);    
 }
-
 
 //variables for unit conversion
 let farenheitLink = document.querySelector('.farenheit');
